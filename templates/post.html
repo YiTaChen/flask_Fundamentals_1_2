@@ -1,0 +1,20 @@
+
+{% extends "index.html" %} {% block title %} Post Detail {% endblock %}
+<!-- <br> -->
+
+{% block content1 %}
+
+<div>
+    <h1>post: {{ post.title }}</h1>
+    <p>postID: {{post.pid}}</p>
+    <h3>category: {{ post.category }} </h3>
+    <p>content: {{ post.content }}</p>
+    <p>published date: {{ post.date_published }}</p>
+</div>
+
+<a href="{{ url_for('homepage' )}}">Back to Home</a>
+
+
+{% endblock %}
+
+

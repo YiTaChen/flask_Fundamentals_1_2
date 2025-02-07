@@ -1,0 +1,30 @@
+
+{% extends "index.html" %} {% block title %} Category {% endblock %}
+<!-- <br> -->
+
+{% block content1 %}
+<br><br>
+Category list in db {{ category_list}}
+
+
+{% if posts %}
+<br />
+{% for post in posts %}
+<div>
+  <h1>post: {{ post.title }}</h1>
+  <p>postID: {{post.pid}}</p>
+  <h3>category: {{ post.category }} </h3>
+  <p>content: {{ post.content }}</p>
+  <!-- <p>published date: {{ post.date_published }}</p> -->
+  {{ date_display_in_format(post.date_published) }}
+  
+  <a href="{{ url_for('get_one_posts', pid = post.pid )}}">View More</a>
+  <br>
+
+</div>
+<br>
+  <hr>
+{% endfor %} {% endif %}
+
+
+{% endblock %}

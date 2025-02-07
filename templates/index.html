@@ -1,0 +1,48 @@
+
+{% from 'macro_date.html' import date_display_in_format %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Homepage {% endblock %}</title>
+</head>
+<header>
+    {% include 'navbar.html'  %}
+
+</header>
+<body>
+<br>
+
+  {{ errorMsg }}
+
+  {% block content1 %}
+    
+  {% if posts %}
+  <br />
+  {% for post in posts %}
+  <div>
+    <h1>post: {{ post.title }}</h1>
+    <p>postID: {{post.pid}}</p>
+    <h3>category: {{ post.category }} </h3>
+    <p>content: {{ post.content }}</p>
+    <!-- <p>published date: {{ post.date_published }}</p> -->
+    {{ date_display_in_format(post.date_published) }}
+    <br>
+
+    <a href="{{ url_for('get_one_posts', pid = post.pid )}}">View More</a>
+    <br>
+
+  </div>
+  <br>
+    <hr>
+  {% endfor %} {% endif %}
+
+
+  <br>
+  {% endblock %}
+    
+</body>
+</html>
+

@@ -1,0 +1,34 @@
+
+{% extends "index.html" %} {% block title %} Add a Post {% endblock %}
+<!-- <br> -->
+
+{% block content1 %}
+<h2>Let's add a post !! </h2>
+<p>Please enter data bellow:</p>
+<form action="" method="post" >
+    <div >
+      <label for="title">Title: </label>
+      <input type="text" name="title" id="title" required />
+    </div>
+
+    <div >
+      <label for="category">Category: </label>
+      <input type="text" name="category" id="category" required />
+    </div>
+    <br>
+    <div >
+        <label for="content">Content: </label>
+        <textarea rows="5" cols="20" type="text" name="content" id="content" required></textarea> 
+    </div>
+    <br>
+    <div >
+      <input type="submit" value="Submit!" />
+    </div>
+  </form>
+
+<br><br>
+    <!-- <a href="{{ url_for('homepage' )}}">Back to Home</a> -->
+
+  {% endblock %}
+
+
