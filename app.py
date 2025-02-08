@@ -41,15 +41,19 @@ def get_one_posts(pid):
     return render_template("post.html", errorMsg = errorMsg)
 
 
-def add_to_db_posts(title, category, content):
-    global posts
-    global globle_max_post_id
+def get_now_time_with_format():
     timeNow = datetime.datetime.now()
     month = str (timeNow.month) 
     month = "0" + month  if len( month) == 1 else  month
     day = str (timeNow.day)
     day = "0" + day  if len( day) == 1 else  day 
     timeFormat = f"{month}/{day}/{timeNow.year}"
+    return timeFormat
+
+def add_to_db_posts(title, category, content):
+    global posts
+    global globle_max_post_id
+    timeFormat = get_now_time_with_format()
     postDict = { "pid":globle_max_post_id + 1, "title": title, "category": category, "content": content, "date_published":timeFormat}
     posts.append(postDict)
     globle_max_post_id += 1
@@ -63,6 +67,28 @@ def add_post():
         add_to_db_posts(request.form["title"], request.form["category"], request.form["content"])
         return redirect(url_for("homepage", errorMsg = "post added successfull!! post id: " + str(globle_max_post_id)))
     return render_template("add_post.html")
+
+@app.route('/update_post/<pid>' , methods=['GET', 'PUT'])
+def update_post(pid):
+    global posts
+    pid = int(pid)
+    post = get_list_item( posts, "pid", pid)
+    if post == None:
+        return render_template("update_post.html", errorMsg = f"post id: {pid} not found !! pls try again")
+
+    if request.method == 'PUT':
+        # print('got PUT!!')
+        json_data = request.json
+ 
+        post["title"]= json_data["title"]
+        post["category"]= json_data["category"]
+        post["content"]= json_data["content"]
+        post["date_published"]= get_now_time_with_format() 
+
+        return redirect(url_for("homepage", errorMsg = f"post update successfull!! post id: {pid} " ))
+   
+    return render_template("update_post.html", post = post)
+
 
 
 def get_all_category_list():

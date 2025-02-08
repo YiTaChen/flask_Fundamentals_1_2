@@ -1,0 +1,48 @@
+
+{% extends 'add_post.html'%}
+{% block title %} Update Post {% endblock %}
+
+{% block welcome_words %} Try to update the post !! {% endblock %}
+
+{% block form_method %} {% endblock %}
+<!-- leave blank, use javaScript instead.   
+     origin http Form not support Put request
+     can use post request and add additional hidden input field to pass Put as a parameter 
+     but backend need to use 'Post' to handle 'put' request 
+-->
+
+{% block script %}
+{%if post%}
+<script>
+document.getElementById("post_form").addEventListener("submit", function(event)
+    {
+    event.preventDefault();
+    fetch("/update_post/{{post.pid}}", {
+        method:"put",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            title: document.getElementById("title").value,
+            category: document.getElementById("category").value,
+            content: document.getElementById("content").value
+        })
+    })
+    .then(response => {
+        if (response.redirected){
+            window.location.href = response.url;
+        }
+
+    });
+    }
+
+    )
+</script>
+{%endif%}
+{% endblock %}
+
+
+
+
+
+

@@ -15,7 +15,10 @@
 <body>
 <br>
 
-  {{ errorMsg }}
+  {% if errorMsg %} 
+   {{ errorMsg }}
+  {% else %}
+  {% endif %}
 
   {% block content1 %}
     
@@ -35,7 +38,8 @@
     {{ date_display_in_format(post.date_published) }}
     <br>
 
-    <a href="{{ url_for('get_one_posts', pid = post.pid )}}">View More</a>
+    <a href="{{ url_for('get_one_posts', pid = post.pid )}}">View More</a> or 
+    <a href="{{ url_for('update_post', pid = post.pid )}}">Edit Post</a> 
     <br>
 
   </div>
@@ -46,7 +50,6 @@
 
   <br>
   {% endblock %}
-    
 </body>
 </html>
 

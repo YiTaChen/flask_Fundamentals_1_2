@@ -3,22 +3,31 @@
 <!-- <br> -->
 
 {% block content1 %}
-<h2>Let's add a post !! </h2>
+<h2> {% block welcome_words %} Let's add a post !! {% endblock %} </h2>
 <p>Please enter data bellow:</p>
-<form action="" method="post" >
+<form id="post_form"  action=""  {% block form_method %}   method="POST" {% endblock %} >
     <div >
       <label for="title">Title: </label>
-      <input type="text" name="title" id="title" required />
+      <input type="text" name="title" id="title" 
+        {% if post %}
+          value="{{post.title}}" 
+        {% endif %}
+      required /> 
     </div>
 
     <div >
       <label for="category">Category: </label>
-      <input type="text" name="category" id="category" required />
+      <input type="text" name="category" id="category"      
+        {% if post %}
+          value="{{post.category}}" 
+        {% endif %}   
+      required />
     </div>
     <br>
     <div >
         <label for="content">Content: </label>
-        <textarea rows="5" cols="20" type="text" name="content" id="content" required></textarea> 
+        <textarea rows="5" cols="20" type="text" name="content" id="content"
+      required>{% if post %}{{post.content}}{% endif %}</textarea> 
     </div>
     <br>
     <div >
@@ -29,6 +38,8 @@
 <br><br>
     <!-- <a href="{{ url_for('homepage' )}}">Back to Home</a> -->
 
+
+  {% block script %} {% endblock %}
   {% endblock %}
 
 
