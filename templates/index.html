@@ -26,7 +26,11 @@
     <h1>post: {{ post.title }}</h1>
     <p>postID: {{post.pid}}</p>
     <h3>category: {{ post.category }} </h3>
-    <p>content: {{ post.content }}</p>
+    {% if post.content | length > 4 %}
+      <p>content: {{ post.content[:4]+"..." }}</p>
+    {% else %}
+      <p>short excerpt: {{ post.content }}</p>
+    {% endif %}
     <!-- <p>published date: {{ post.date_published }}</p> -->
     {{ date_display_in_format(post.date_published) }}
     <br>
