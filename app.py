@@ -1,9 +1,10 @@
 
 from flask import Flask, request, render_template, redirect, url_for
+import datetime
 app = Flask(__name__)
 
 
-posts = [ { "pid":1, "title": "good day" , "category": "Technology", "content":"hahaha", "date_published":"01/15/2025" },
+posts = [ { "pid":1, "title": "good day" , "category": "Technology", "content":"hahaha", "date_published":"01/15/2025"} ,
           { "pid":2, "title": "snow day" , "category": "Bussiness", "content":"hohoho", "date_published":"01/16/2025"},
           { "pid":3, "title": "windy day" , "category": "Food", "content":"hihihi", "date_published":"01/17/2025"} ]
 
@@ -43,7 +44,13 @@ def get_one_posts(pid):
 def add_to_db_posts(title, category, content):
     global posts
     global globle_max_post_id
-    postDict = { "pid":globle_max_post_id + 1, "title": title, "category": category, "content": content, "date_published":"01/17/2025"}
+    timeNow = datetime.datetime.now()
+    month = str (timeNow.month) 
+    month = "0" + month  if len( month) == 1 else  month
+    day = str (timeNow.day)
+    day = "0" + day  if len( day) == 1 else  day 
+    timeFormat = f"{month}/{day}/{timeNow.year}"
+    postDict = { "pid":globle_max_post_id + 1, "title": title, "category": category, "content": content, "date_published":timeFormat}
     posts.append(postDict)
     globle_max_post_id += 1
     return None

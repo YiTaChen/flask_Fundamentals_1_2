@@ -1,8 +1,38 @@
 
 {% macro date_display_in_format(date) %}
 
-<!-- <p>published 111 date: {{ date }}</p> -->
-<!-- todo -->
-<p>published date: January 15, 2025</p> 
+{% set year = date[6:10]%}
+{% set month = date[0:2]%}
+{% set day = date[3:5]%}
+
+{% if month == '01' %}
+    {% set month = 'January' %}     
+{% elif month == '02' %}
+    {% set month = 'February' %}
+{% elif month == '03' %}
+    {% set month = 'March' %}
+{% elif month == '04' %}
+    {% set month = 'April' %}
+{% elif month == '05' %}
+    {% set month = 'May' %}
+{% elif month == '06' %}
+    {% set month = 'June' %}
+{% elif month == '07' %}
+    {% set month = 'July' %}
+{% elif month == '08' %}
+    {% set month = 'August' %}
+{% elif month == '09' %}
+    {% set month = 'September' %}
+{% elif month == '10' %}
+    {% set month = 'October' %}
+{% elif month == '11' %}
+    {% set month = 'November' %}
+{% elif month == '12' %}
+    {% set month = 'December' %}
+
+{% endif %}
+
+<p>published date: {{month}} {{day}}, {{year}} </p>
+
 
 {% endmacro %}
