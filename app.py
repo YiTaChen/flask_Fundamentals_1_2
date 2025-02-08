@@ -53,7 +53,9 @@ def get_now_time_with_format():
 def add_to_db_posts(title, category, content):
     global posts
     global globle_max_post_id
+
     timeFormat = get_now_time_with_format()
+
     postDict = { "pid":globle_max_post_id + 1, "title": title, "category": category, "content": content, "date_published":timeFormat}
     posts.append(postDict)
     globle_max_post_id += 1
